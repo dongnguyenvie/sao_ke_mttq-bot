@@ -1,0 +1,11 @@
+version: '3'
+services:
+  bot:
+    image: node:18 # Use the official Node.js image
+    container_name: telegram_bot
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app # Mount the current directory with your source code
+    command: >
+      sh -c "npm install && node server.js"  # Ensure npm install is followed by node server.js
+    restart: 'unless-stopped' # Restart the container unless it is stopped manually
