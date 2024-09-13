@@ -44,7 +44,7 @@ function searchDatabase(query, callback) {
 // Function to format the search results into a readable format
 function formatResults(rows) {
   if (rows.length === 0) {
-    return "Không tìm thấy kết quả nào. ấn /start để thử lại hoặc button bên dưới, dữ diệu này từ 1/09 - 10/09/2024";
+    return "Không tìm thấy kết quả nào. ấn /start để thử lại hoặc nút Tìm kiếm sao kê bên dưới, dữ diệu này từ 1/09 - 10/09/2024";
   }
 
   return rows
@@ -79,7 +79,7 @@ function initBot() {
       "Welcome! Vui lòng chọn một trong các lựa chọn sau:",
       {
         reply_markup: {
-          keyboard: [[{ text: "Liên hệ" }, { text: "Xem sao kê MTTQ" }]],
+          keyboard: [[{ text: "Liên hệ" }, { text: "Tìm kiếm Sao Kê" }]],
           resize_keyboard: true,
           one_time_keyboard: true,
         },
@@ -97,13 +97,13 @@ function initBot() {
         chatId,
         "Mình là Đông, Mình là thợ code, mình nhận làm tool, web, app, bla bla bla @quynhdev"
       );
-      // user can move to xem sao kê MTTQ
+      // user can move to Tìm kiếm Sao Kê
       bot.sendMessage(
         chatId,
-        "Bạn có thể xem sao kê MTTQ bằng cách nhấn vào nút bên dưới.",
+        "Bạn có thể Tìm kiếm Sao Kê bằng cách nhấn vào nút bên dưới.",
         {
           reply_markup: {
-            keyboard: [[{ text: "Xem sao kê MTTQ" }]],
+            keyboard: [[{ text: "Tìm kiếm Sao Kê" }]],
             resize_keyboard: true,
             one_time_keyboard: true,
           },
@@ -112,7 +112,7 @@ function initBot() {
     }
 
     // If user presses "Search Content"
-    else if (msg.text === "Xem sao kê MTTQ") {
+    else if (msg.text === "Tìm kiếm Sao Kê") {
       bot.sendMessage(
         chatId,
         "Bạn có thể nhập nội dung, transactionId, số tiền để tìm kiếm."
@@ -132,10 +132,10 @@ function initBot() {
 
             bot.sendMessage(
               chatId,
-              "Bạn có thể xem sao kê MTTQ bằng cách nhấn vào nút bên dưới để thử lại.",
+              "Bạn có thể Tìm kiếm Sao Kê bằng cách nhấn vào nút bên dưới để thử lại.",
               {
                 reply_markup: {
-                  keyboard: [[{ text: "Xem sao kê MTTQ" }]],
+                  keyboard: [[{ text: "Tìm kiếm Sao Kê" }]],
                   resize_keyboard: true,
                   one_time_keyboard: true,
                 },
@@ -164,14 +164,19 @@ function sendMessageInChunksWithMarkup(chatId, message, bot) {
   const maxMessageLength = 4096; // Telegram's message limit
   const replyMarkup = {
     reply_markup: {
-      keyboard: [[{ text: "Liên hệ" }, { text: "Xem sao kê MTTQ" }]],
+      keyboard: [[{ text: "Liên hệ" }, { text: "Tìm kiếm Sao Kê" }]],
       resize_keyboard: true,
       one_time_keyboard: true,
     },
   };
 
   if (message.length <= maxMessageLength) {
-    bot.sendMessage(chatId, message, replyMarkup);
+    bot.sendMessage(chatId, message);
+    bot.sendMessage(
+      chatId,
+      `ấn /start để thử lại hoặc nút Tìm kiếm sao kê bên dưới để tiếp tục, dữ diệu này từ 1/09 - 10/09/2024`,
+      replyMarkup
+    );
   } else {
     // Split message into smaller chunks
     let chunks = [];
