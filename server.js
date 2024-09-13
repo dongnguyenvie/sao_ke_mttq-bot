@@ -44,7 +44,7 @@ function searchDatabase(query, callback) {
 // Function to format the search results into a readable format
 function formatResults(rows) {
   if (rows.length === 0) {
-    return "No results found.";
+    return "Không tìm thấy kết quả nào. ấn /start để thử lại hoặc button bên dưới, dữ diệu này từ 1/09 - 10/09/2024";
   }
 
   return rows
@@ -52,7 +52,7 @@ function formatResults(rows) {
       (row, index) =>
         `${index + 1}. Ngày: ${row.date}\nTNX Date: ${row.tnx_date}\nSố tiền: ${
           row.amount
-        }\nội dung: ${row.content}\n`
+        }\nnội dung: ${row.content}\n`
     )
     .join("\n");
 }
