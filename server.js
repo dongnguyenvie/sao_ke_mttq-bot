@@ -50,9 +50,9 @@ function formatResults(rows) {
   return rows
     .map(
       (row, index) =>
-        `${index + 1}. Date: ${row.date}\nTNX Date: ${row.tnx_date}\nAmount: ${
+        `${index + 1}. Ngày: ${row.date}\nTNX Date: ${row.tnx_date}\nSố tiền: ${
           row.amount
-        }\nContent: ${row.content}\n`
+        }\nội dung: ${row.content}\n`
     )
     .join("\n");
 }
@@ -120,7 +120,7 @@ function initBot() {
 
       // Wait for the user's search input
       bot.once("message", (searchMsg) => {
-        const searchQuery = searchMsg.text;
+        const searchQuery = String(searchMsg.text).toLowerCase();
 
         // Search the database for matching results
         searchDatabase(searchQuery, (err, rows) => {

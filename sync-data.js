@@ -98,7 +98,7 @@ function extractData(rawText) {
       date: date,
       TNXDate: tnxDate,
       amount: amount,
-      content: content,
+      content: String(content).toLowerCase(),
     });
   }
 
