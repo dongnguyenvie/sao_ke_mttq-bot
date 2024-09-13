@@ -129,6 +129,18 @@ function initBot() {
               chatId,
               "Có lỗi xảy ra khi tìm kiếm, vui lòng thử lại."
             );
+
+            bot.sendMessage(
+              chatId,
+              "Bạn có thể xem sao kê MTTQ bằng cách nhấn vào nút bên dưới để thử lại.",
+              {
+                reply_markup: {
+                  keyboard: [[{ text: "Xem sao kê MTTQ" }]],
+                  resize_keyboard: true,
+                  one_time_keyboard: true,
+                },
+              }
+            );
           } else {
             const formattedResults = formatResults(rows);
             sendMessageInChunksWithMarkup(chatId, formattedResults, bot);
