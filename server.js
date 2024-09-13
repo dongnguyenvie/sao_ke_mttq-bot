@@ -171,12 +171,7 @@ function sendMessageInChunksWithMarkup(chatId, message, bot) {
   };
 
   if (message.length <= maxMessageLength) {
-    bot.sendMessage(chatId, message);
-    bot.sendMessage(
-      chatId,
-      `ấn /start để thử lại hoặc nút Tìm kiếm sao kê bên dưới để tiếp tục, dữ diệu này từ 1/09 - 10/09/2024`,
-      replyMarkup
-    );
+    bot.sendMessage(chatId, message, replyMarkup);
   } else {
     // Split message into smaller chunks
     let chunks = [];
@@ -189,6 +184,11 @@ function sendMessageInChunksWithMarkup(chatId, message, bot) {
       if (index === chunks.length - 1) {
         // For the last message, send with reply markup
         bot.sendMessage(chatId, chunk, replyMarkup);
+        bot.sendMessage(
+          chatId,
+          `ấn /start để thử lại hoặc nút Tìm kiếm sao kê bên dưới để tiếp tục, dữ diệu này từ 1/09 - 10/09/2024`,
+          replyMarkup
+        );
       } else {
         bot.sendMessage(chatId, chunk);
       }
