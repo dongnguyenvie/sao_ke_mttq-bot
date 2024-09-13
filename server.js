@@ -147,6 +147,33 @@ function initBot() {
           }
         });
       });
+    } else {
+      const searchQuery = String(msg.text).toLowerCase();
+
+      // Search the database for matching results
+      searchDatabase(searchQuery, (err, rows) => {
+        if (err) {
+          bot.sendMessage(
+            chatId,
+            "Có lỗi xảy ra khi tìm kiếm, vui lòng thử lại."
+          );
+
+          bot.sendMessage(
+            chatId,
+            "Bạn có thể Tìm kiếm Sao Kê bằng cách nhấn vào nút bên dưới để thử lại.",
+            {
+              reply_markup: {
+                keyboard: [[{ text: "Tìm kiếm Sao Kê" }]],
+                resize_keyboard: true,
+                one_time_keyboard: true,
+              },
+            }
+          );
+        } else {
+          const formattedResults = formatResults(rows);
+          sendMessageInChunksWithMarkup(chatId, formattedResults, bot);
+        }
+      });
     }
   });
 }
@@ -183,12 +210,7 @@ function sendMessageInChunksWithMarkup(chatId, message, bot) {
     chunks.forEach((chunk, index) => {
       if (index === chunks.length - 1) {
         // For the last message, send with reply markup
-        bot.sendMessage(chatId, chunk);
-        bot.sendMessage(
-          chatId,
-          `ấn /start để thử lại hoặc nút Tìm kiếm sao kê bên dưới để tiếp tục, dữ diệu này từ 1/09 - 10/09/2024`,
-          replyMarkup
-        );
+        bot.sendMessage(chatId, chunk, replyMarkup);
       } else {
         bot.sendMessage(chatId, chunk);
       }
