@@ -27,7 +27,7 @@ function searchDatabase(query, callback) {
   const sql = `
     SELECT date, tnx_date, amount, content
     FROM pdf_content
-    WHERE content LIKE ? OR amount = ?`;
+    WHERE content LIKE ? OR amount = ? LIMIT 10`;
 
   const searchQuery = `%${query}%`; // Use wildcard search for content
 
