@@ -183,7 +183,7 @@ function sendMessageInChunksWithMarkup(chatId, message, bot) {
     chunks.forEach((chunk, index) => {
       if (index === chunks.length - 1) {
         // For the last message, send with reply markup
-        bot.sendMessage(chatId, chunk, replyMarkup);
+        bot.sendMessage(chatId, chunk);
         bot.sendMessage(
           chatId,
           `ấn /start để thử lại hoặc nút Tìm kiếm sao kê bên dưới để tiếp tục, dữ diệu này từ 1/09 - 10/09/2024`,
