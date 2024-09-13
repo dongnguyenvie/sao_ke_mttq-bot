@@ -70,29 +70,42 @@ process.on("SIGINT", () => {
 
 function initBot() {
   // Handle /start command
-  bot.onText(/\/start/, (msg) => {
-    const chatId = msg.chat.id;
+  // bot.onText(/\/start/, (msg) => {
+  //   const chatId = msg.chat.id;
 
-    // Show the "Get Started" buttons
-    bot.sendMessage(
-      chatId,
-      "Welcome! Vui lòng chọn một trong các lựa chọn sau:",
-      {
-        reply_markup: {
-          keyboard: [[{ text: "Liên hệ" }, { text: "Tìm kiếm Sao Kê" }]],
-          resize_keyboard: true,
-          one_time_keyboard: true,
-        },
-      }
-    );
-  });
+  //   // Show the "Get Started" buttons
+  //   bot.sendMessage(
+  //     chatId,
+  //     "Welcome! Vui lòng chọn một trong các lựa chọn sau:",
+  //     {
+  //       reply_markup: {
+  //         keyboard: [[{ text: "Liên hệ" }, { text: "Tìm kiếm Sao Kê" }]],
+  //         resize_keyboard: true,
+  //         one_time_keyboard: true,
+  //       },
+  //     }
+  //   );
+  // });
 
   // Handle button press for "Show My Info"
   bot.on("message", (msg) => {
     const chatId = msg.chat.id;
 
+    if (msg.text === "/start") {
+      bot.sendMessage(
+        chatId,
+        "Welcome! Vui lòng chọn một trong các lựa chọn sau:",
+        {
+          reply_markup: {
+            keyboard: [[{ text: "Liên hệ" }, { text: "Tìm kiếm Sao Kê" }]],
+            resize_keyboard: true,
+            one_time_keyboard: true,
+          },
+        }
+      );
+    }
     // If user presses "Show My Info"
-    if (msg.text === "Liên hệ") {
+    else if (msg.text === "Liên hệ") {
       bot.sendMessage(
         chatId,
         "Mình là Đông, Mình là thợ code, mình nhận làm tool, web, app, bla bla bla @quynhdev"
