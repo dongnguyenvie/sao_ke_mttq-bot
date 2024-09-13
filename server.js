@@ -131,35 +131,35 @@ function initBot() {
         "Bạn có thể nhập nội dung, transactionId, số tiền để tìm kiếm."
       );
 
-      // Wait for the user's search input
-      bot.once("message", (searchMsg) => {
-        const searchQuery = String(searchMsg.text).toLowerCase();
+      // // Wait for the user's search input
+      // bot.once("message", (searchMsg) => {
+      //   const searchQuery = String(searchMsg.text).toLowerCase();
 
-        // Search the database for matching results
-        searchDatabase(searchQuery, (err, rows) => {
-          if (err) {
-            bot.sendMessage(
-              chatId,
-              "Có lỗi xảy ra khi tìm kiếm, vui lòng thử lại."
-            );
+      //   // Search the database for matching results
+      //   searchDatabase(searchQuery, (err, rows) => {
+      //     if (err) {
+      //       bot.sendMessage(
+      //         chatId,
+      //         "Có lỗi xảy ra khi tìm kiếm, vui lòng thử lại."
+      //       );
 
-            bot.sendMessage(
-              chatId,
-              "Bạn có thể Tìm kiếm Sao Kê bằng cách nhấn vào nút bên dưới để thử lại.",
-              {
-                reply_markup: {
-                  keyboard: [[{ text: "Tìm kiếm Sao Kê" }]],
-                  resize_keyboard: true,
-                  one_time_keyboard: true,
-                },
-              }
-            );
-          } else {
-            const formattedResults = formatResults(rows);
-            sendMessageInChunksWithMarkup(chatId, formattedResults, bot);
-          }
-        });
-      });
+      //       bot.sendMessage(
+      //         chatId,
+      //         "Bạn có thể Tìm kiếm Sao Kê bằng cách nhấn vào nút bên dưới để thử lại.",
+      //         {
+      //           reply_markup: {
+      //             keyboard: [[{ text: "Tìm kiếm Sao Kê" }]],
+      //             resize_keyboard: true,
+      //             one_time_keyboard: true,
+      //           },
+      //         }
+      //       );
+      //     } else {
+      //       const formattedResults = formatResults(rows);
+      //       sendMessageInChunksWithMarkup(chatId, formattedResults, bot);
+      //     }
+      //   });
+      // });
     } else {
       const searchQuery = String(msg.text).toLowerCase();
 
